@@ -1,0 +1,67 @@
+[
+    {
+        "link": "https://zitefy.com/seo/logo.png",
+        "selector": "image",
+        "value": ""
+    },
+    {
+        "link": "",
+        "selector": "name",
+        "value": "zitefy"
+    },
+    {
+        "link": "",
+        "selector": "username",
+        "value": "zitefy"
+    },
+    {
+        "link": "mailto:",
+        "selector": "email",
+        "value": "zitefy@email.com"
+    },
+    {
+        "link": "",
+        "selector": "age",
+        "value": "27 June, 2024"
+    },
+    {
+        "link": "",
+        "selector": "pronouns",
+        "value": "they/them"
+    },
+    {
+        "link": "",
+        "selector": "bio",
+        "value": "a one-stop ai powered link in bio tool"
+    },
+    {
+        "link": "tel:",
+        "selector": "phone",
+        "value": "+919074775013"
+    },
+    {
+        "link": "https://instagram.com/",
+        "selector": "instagram",
+        "value": "zitefy"
+    },
+    {
+        "link": "https://twitter.com/",
+        "selector": "twitter",
+        "value": "@zitefy"
+    },
+    {
+        "link": "https://github.com/",
+        "selector": "github",
+        "value": "zitefy"
+    },
+    {
+        "link": "https://linkedin.com/in/",
+        "selector": "linkedin",
+        "value": "zitefy"
+    },
+    {
+        "link": "",
+        "selector": "other",
+        "value": "https://url.com/"
+    }
+]
