@@ -25,9 +25,9 @@ In order for the core functionalities to work, there should be a central system 
 * Generate previews for templates, sites & the web based editor
 
 ### Architectural Overview
-This is written from the high level system architecture shown below. You can find some pointers below highlighting the core idea in a nutshell. Feel free to open a new issue if you find any part of this documentation confusing or hard to understand.
+This is written from the high level architecture shown below. You can find some pointers below highlighting the core idea in a nutshell. Feel free to open a new issue if you find any part of this documentation confusing or hard to understand.
 
-<img width="1005" alt="architecture" src="https://github.com/user-attachments/assets/656b22af-9c7a-46d8-899c-74bf30a32c64">
+![arch](https://github.com/user-attachments/assets/344ba61f-b1d4-48b2-8066-405e8716aac2)
 
 *In a nutshell...*
   * Each user can register themselves on the API. Once registered or logged in, the API will generate an access token that can then be used to access the secure endpoints. Registered users can create sites from the available templates.
