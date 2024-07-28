@@ -23,6 +23,8 @@ use handlers::{user::LoginResponse, proxy_anthropic};
 use models::user::{EditData, LoginData, SignupData, UserDataResponse};
 use services::tempfiles::TempFileService;
 
+// this is very cumbersome, has to be changed.
+// right now, we don't have time to clean this up, but there should be a way.
 #[derive(OpenApi)]
 #[openapi(
     paths(

@@ -1,3 +1,9 @@
+/*
+  This is a script that takes in the html, css & js to generate a single html string. 
+  It adds the CSS to a <style></style> tag, the JS to a <script type="module"></script> tag.
+  It then adds the links to the specified elements, hides the unselected ones, and returns the final string.
+*/
+
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
 

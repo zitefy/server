@@ -5,6 +5,9 @@ use std::{sync::Arc, env, path::PathBuf};
 
 use crate::models::user::User;
 
+// the server at zitefy.com
+// checks if a username matches one in the db & if it has an active site.
+// if so, serves the site, otherwise redirects to the portal
 pub async fn domain_server(
     app_state: web::Data<Arc<Database>>,
     req: HttpRequest,

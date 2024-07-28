@@ -5,6 +5,7 @@ use uuid::Uuid;
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+// basically just a setup to manage temporarry files, like preview images in the editor.
 pub struct TempFile {
     path: PathBuf,
     expiry: u64,

@@ -62,6 +62,7 @@ pub struct Site {
     pub user: ObjectId,
 }
 
+// most of the names & code are self-explanatory. nothing much to document per se
 impl Site {
     pub async fn new(
         template_id: ObjectId,
@@ -351,6 +352,7 @@ pub fn read_dir_to_string(dir: &Path) -> io::Result<String> {
     Ok(contents)
 }
 
+// recursively reads the contents of a directory to filenames and returns them
 pub fn read_dir_to_names(dir: &Path) -> io::Result<Vec<String>> {
     let mut urls = Vec::new();
     for entry in fs::read_dir(dir)? {

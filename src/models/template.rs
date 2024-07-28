@@ -31,6 +31,7 @@ pub struct Template {
 }
 
 impl Template {
+    // add a template from metadata.json in the directory
     pub async fn from_metadata(path: &Path) -> Result<Template, Box<dyn std::error::Error>> {
         let metadata_path = path.join("metadata.json");
         let metadata_file = fs::File::open(metadata_path)?;
@@ -55,6 +56,7 @@ impl Template {
         })).await?)
     }
 
+    // build a site from a specified template
     pub async fn build_site(site_id: ObjectId, user_id: ObjectId, template_id: ObjectId, app_state: &Arc<AppState>) -> Result<PathBuf, Box<dyn std::error::Error>> {
         let home_dir = std::env::var("HOME")?;
         let site_dir = Path::new(&home_dir).join(".zitefy").join("sites").join(site_id.to_hex());
@@ -98,6 +100,7 @@ impl Template {
 
 }
 
+// copy everything from one dir to another
 fn copy_dir_all(src: &Path, dst: &Path, exclude: Option<&str>) -> io::Result<()> {
     if !dst.exists() {
         fs::create_dir_all(dst)?;
@@ -125,6 +128,7 @@ fn copy_dir_all(src: &Path, dst: &Path, exclude: Option<&str>) -> io::Result<()>
     Ok(())
 }
 
+// invoked by the background task to add a template to the db
 pub async fn update_template_in_db(path: &Path, app_state: &Arc<AppState>) -> Result<(), Box<dyn std::error::Error>> {
     let mut template = Template::from_metadata(path).await?;
     template.dir_path = path.to_string_lossy().to_string();
@@ -139,6 +143,7 @@ pub async fn update_template_in_db(path: &Path, app_state: &Arc<AppState>) -> Re
     Ok(())
 }
 
+// if ever we wanna implement deleting templates. code is redundant rn, so commenting to reduce build size.
 // pub async fn delete_template_from_db(path: &Path, app_state: &Arc<AppState>) -> Result<(), Box<dyn std::error::Error>> {
 //     let metadata_path = path.join("metadata.json");
 //     if metadata_path.exists() {

@@ -1,3 +1,6 @@
+// In this file, the logic should have existed in models/user.rs
+// in the heat of the moment, I've just gotten this to work.
+
 use actix_files::NamedFile;
 use actix_multipart::Multipart;
 use actix_web::http::Error;
@@ -236,6 +239,8 @@ async fn edit(
 ) -> impl Responder {
     let users: Collection<User> = app_state.db.collection("users");
 
+    // there might be a way to refactor this better. this line repeats everywhere
+    // get_user_id_from_token() was refactored, but i still think there's more room.
     let user_id = match get_user_id_from_token(&req, &app_state).await {
         Ok(id) => id,
         Err(response) => return response,
