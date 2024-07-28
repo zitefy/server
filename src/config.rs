@@ -27,6 +27,9 @@ impl Config {
     }
 }
 
+// Right now, this seems like the best way to manage the upload of templates from github
+// This function is very expensive, so a better method would be to write a dedicated endpoint for uploading templates from the site,
+// and adding it to the database along with it. But that's for another day.
 pub async fn monitor_templates_directory(app_state: Arc<AppState>) {
     let templates_dir = format!("{}/.zitefy/templates", env::var("HOME").unwrap());
 

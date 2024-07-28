@@ -1,6 +1,6 @@
 /*
- During initial setup, run bun run puppeteer browsers install chrome,
- and copy the executable path to line 8
+    This script takes in as input a file that contains a HTML string, renders it in a browser instance, and takes two screenshots in different sizes.
+    During initial setup, run bun run puppeteer browsers install chrome, and copy the executable path to line 8
 */
 const puppeteer = require('puppeteer');
 

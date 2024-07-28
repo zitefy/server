@@ -13,6 +13,8 @@ pub struct Preview {
     pub desktop: PathBuf,
 }
 
+// if a path is provided, the preview images will be stored to that path, otherwise generates a temporarry file
+// useful for generating permenant and temporarry images (for template previews)
 pub async fn generate_preview(
     html: &str,
     paths: Option<Preview>,
@@ -55,6 +57,7 @@ pub async fn generate_preview(
     })
 }
 
+// just a wrapper around scripts/builder.js
 pub fn build_html_string(
     html: PathBuf,
     css: PathBuf,
