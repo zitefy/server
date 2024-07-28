@@ -9,7 +9,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-22.04
 
     steps:
@@ -25,11 +24,12 @@ jobs:
       run: sudo apt-get install sshpass rsync
     - name: write changes to server
       run: |
-        sshpass -p ${{ secrets.VPS_PASSWORD }} rsync -avz -e 'ssh -o StrictHostKeyChecking=no' target/release/ vishalds@${{ secrets.VPS_HOST }}:/home/vishalds/server/; sshpass -p ${{ secrets.VPS_PASSWORD }} rsync -avz -e 'ssh -o StrictHostKeyChecking=no' scripts/ vishalds@${{ secrets.VPS_HOST }}:/home/vishalds/scripts/
+        sshpass -p ${{ secrets.VPS_PASSWORD }} rsync -avz -e 'ssh -o StrictHostKeyChecking=no' target/release/ vishalds@${{ secrets.VPS_HOST }}:/home/vishalds/server/
+        sshpass -p ${{ secrets.VPS_PASSWORD }} rsync -avz -e 'ssh -o StrictHostKeyChecking=no' scripts/ vishalds@${{ secrets.VPS_HOST }}:/home/vishalds/scripts/
       env:
         VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
     - name: restart server
       run: |
-        sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -o StrictHostKeyChecking=no vishalds@${{ secrets.VPS_HOST }} 'sudo systemctl restart zitefy.service'
+        sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -o StrictHostKeyChecking=no vishalds@${{ secrets.VPS_HOST }} 'echo ${{ secrets.VPS_PASSWORD }} | sudo -S systemctl restart zitefy.service'
       env:
         VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
