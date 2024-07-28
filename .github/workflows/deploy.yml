@@ -1,0 +1,35 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: 1.75.0
+        override: true
+    - name: build project
+      run: cargo build --release
+    - name: install tools
+      run: sudo apt-get install sshpass rsync
+    - name: write changes to server
+      run: |
+        sshpass -p ${{ secrets.VPS_PASSWORD }} rsync -avz -e 'ssh -o StrictHostKeyChecking=no' target/release/ vishalds@${{ secrets.VPS_HOST }}:/home/vishalds/server/; sshpass -p ${{ secrets.VPS_PASSWORD }} rsync -avz -e 'ssh -o StrictHostKeyChecking=no' scripts/ vishalds@${{ secrets.VPS_HOST }}:/home/vishalds/scripts/
+      env:
+        VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+    - name: restart server
+      run: |
+        sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -o StrictHostKeyChecking=no vishalds@${{ secrets.VPS_HOST }} 'sudo systemctl restart zitefy.service'
+      env:
+        VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
