@@ -5,7 +5,7 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-    const browser = await puppeteer.launch({executablePath: '/home/vishalds/.cache/puppeteer/chrome/linux-126.0.6478.126/chrome-linux64/chrome'});
+    const browser = await puppeteer.launch({executablePath: '/home/vishalds/.cache/puppeteer/chrome/linux-126.0.6478.182/chrome-linux64/chrome'});
     const page = await browser.newPage();
     await page.goto('file://' + process.argv[2]);
 
