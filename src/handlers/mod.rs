@@ -41,7 +41,11 @@ pub async fn proxy_anthropic(
         Ok(response) => {
             let status = response.status();
             let body = response.bytes().await.unwrap_or_default();
-            HttpResponse::build(status).body(body)
+            HttpResponse::build(status)
+                .header("Access-Control-Allow-Origin", "https://zitefy.com")
+                .header("Access-Control-Allow-Methods", "POST, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+                .body(body)
         },
         Err(e) => HttpResponse::InternalServerError().body(format!("Error: {}", e)),
     }
