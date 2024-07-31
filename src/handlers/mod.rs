@@ -33,6 +33,7 @@ pub async fn proxy_anthropic(
     let anthropic_req = app_state.client.post("https://api.anthropic.com/v1/messages")
         .header("x-api-key", bearer_token)
         .header("anthropic-version", "2023-06-01")
+        .header("anthropic-beta", "max-tokens-3-5-sonnet-2024-07-15")
         .header("content-type", "application/json")
         .body(payload);
 
