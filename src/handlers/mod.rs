@@ -41,10 +41,29 @@ pub async fn proxy_anthropic(
         Ok(response) => {
             let status = response.status();
             let body = response.bytes().await.unwrap_or_default();
-            HttpResponse::build(status)
-                .header("Access-Control-Allow-Origin", "https://zitefy.com")
-                .header("Access-Control-Allow-Methods", "POST, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+            
+            // Get the Origin header from the incoming request
+            let origin = req.headers().get("Origin").and_then(|h| h.to_str().ok());
+            
+            // Check if the origin is allowed
+            let allowed_origin = match origin {
+                Some("https://zitefy.com") => Some("https://zitefy.com"),
+                Some("https://www.zitefy.com") => Some("https://www.zitefy.com"),
+                Some("http://localhost:3000") => Some("https://localhost:3000"),
+                Some("http://localhost:5000") => Some("https://localhost:5000"),
+                _ => None,
+            };
+            
+            let mut builder = HttpResponse::build(status);
+            
+            // Set the Access-Control-Allow-Origin header if the origin is allowed
+            if let Some(allowed) = allowed_origin {
+                builder.append_header(("Access-Control-Allow-Origin", allowed));
+            }
+            
+            builder
+                .append_header(("Access-Control-Allow-Methods", "POST, OPTIONS"))
+                .append_header(("Access-Control-Allow-Headers", "Content-Type, Authorization"))
                 .body(body)
         },
         Err(e) => HttpResponse::InternalServerError().body(format!("Error: {}", e)),
